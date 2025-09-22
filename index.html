@@ -1,0 +1,135 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>X-ONE TECH</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(003366, #000000, #330033);
+      color: white;
+      animation: bgCycle 15s infinite linear;
+    }
+
+    @keyframes bgCycle {
+     0% { background-color: #001f3f; }
+      25% { background-color: #003366; }
+      50% { background-color: #4B0082; }
+      75% { background-color: #000; }
+      100% { background-color: #001f3f; }
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      animation: colorFlash 3s infinite;
+    }
+
+    @keyframes colorFlash {
+      0% {color: #00cec9;}
+      25% {color: #fd79a8;}
+      50% {color: #e17055;}
+      75% {color: #0984e3;}
+      100% {color: #00cec9;}
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    marquee {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .section, .page {
+      display: none;
+      padding: 20px;
+ text-align: center;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 14px;
+      width: 80%;
+      max-width: 300px;
+      font-size: 16px;
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #a29bfe;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>X-ONE TECH</h1>
+    <marquee behavior="scroll" direction="left">🚀 Welcome To X-ONE OFFICIAL PAGE! Enjoy Tools, VPNs, Games & More 🚀</marquee>
+  </header>
+
+  <div class="section active" id="home">
+    <button class="btn" onclick="showPage('apks')">Premium APKs</button>
+    <a class="btn" href="https://whatsapp.com/channel/0029VbBKRW7GOj9i4IEOi902">VPNs and Proxy</a>
+    <button class="btn" onclick="showPage('hacking')">X-ONE Hacking Tools</button>
+    <button class="btn" onclick="showPage('gaming')">X-ONE GAMING</button>
+    <a class="btn" href="https://wa.me/254743810633">Contact Admin</a>
+  </div>
+
+  <div class="page" id="apks">
+    <h2>Premium APKs</h2>
+    <a class="btn" href="https://www.mediafire.com/folder/84ghartgt89cl/Stream">1. Streaming Premium APKs</a>
+    <a class="btn" href="https://www.mediafire.com/folder/crb7kta67i0vi/Social">2. Social Media Premium APKs</a>
+    <a class="btn" href="https://www.mediafire.com/folder/kacoid6i33ys6/Ai+Media+Tools">3. Ai Pic/Video Generator and Editor</a>
+    <button class="btn" onclick="showPage('home')">Back</button>
+  </div>
+  <div class="page" id="hacking">
+    <h2>HACKING TOOLS for Android</h2>
+    <a class="btn" href="https://wa.me/254743810633">1. Sms Eye</a>
+    <a class="btn" href="https://www.mediafire.com/file/1458rlored7gszd/ContactEye.7z/file">2. Contact Eye</a>
+    <a class="btn" href="https://www.mediafire.com/file/glzyv9ba188838f/LocationEye.7z/file">3. Location Eye</a>
+    <a class="btn" href="https://www.mediafire.com/file/ybd6oavmwa7r0pl/GalleryEye.7z/file">4. GalleryEye</a>
+    <a class="btn" href="https://www.mediafire.com/file/zh2bi6v4lawcuaw/Wifi+Hack.7z/file">5. WiFi Hack</a>
+    <a class="btn" href="https://www.mediafire.com/folder/as4f0sgwpx9s1/Ttools">6. Termux Tools</a>
+    <button class="btn" onclick="showPage('home')">Back</button>
+  <p>🤑 PAY AND SEND ME SCREENSHOT 🤑
+  BY CLICKING CONTACT SECTION</div>
+
+  <div class="page" id="gaming">
+    <h2>X-ONE GAMING</h2>
+    <p>Games, Game Hacks & OBB Mods</p>
+    <a class="btn" href="https://www.mediafire.com/folder/1rtfxrx42rxt8/Games">1. Games</a>
+    <a class="btn" href="https://www.mediafire.com/folder/l7nqr1c1ffqdc/Obb++mods">2. Obb + Obb Mods</a>
+    <button class="btn" onclick="showPage('home')">Back</button>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.section, .page').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
+
+         
