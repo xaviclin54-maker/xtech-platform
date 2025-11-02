@@ -1,135 +1,232 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>X-ONE TECH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Auth UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(003366, #000000, #330033);
-      color: white;
-      animation: bgCycle 15s infinite linear;
-    }
-
-    @keyframes bgCycle {
-     0% { background-color: #001f3f; }
-      25% { background-color: #003366; }
-      50% { background-color: #4B0082; }
-      75% { background-color: #000; }
-      100% { background-color: #001f3f; }
-    }
-
-    header {
       padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 380px;
       text-align: center;
-      animation: colorFlash 3s infinite;
     }
 
-    @keyframes colorFlash {
-      0% {color: #00cec9;}
-      25% {color: #fd79a8;}
-      50% {color: #e17055;}
-      75% {color: #0984e3;}
-      100% {color: #00cec9;}
+    /* 🌟 Logo */
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 28px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    marquee {
-      font-size: 16px;
-      margin-top: 10px;
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
     }
 
-    .section, .page {
-      display: none;
-      padding: 20px;
- text-align: center;
-    }
-
-    .active {
-      display: block;
+    .input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
     }
 
     .btn {
-      display: block;
-      margin: 10px auto;
-      padding: 14px;
-      width: 80%;
-      max-width: 300px;
-      font-size: 16px;
-      background-color: #6c5ce7;
-      color: white;
+      width: 100%;
+      padding: 10px;
+      background: #2563eb;
+      color: #fff;
       border: none;
       border-radius: 8px;
-      text-decoration: none;
+      font-size: 16px;
       cursor: pointer;
-      transition: 0.3s;
+      margin-top: 8px;
     }
 
-    .btn:hover {
-      background-color: #a29bfe;
-      transform: scale(1.05);
+    .btn:hover { opacity: 0.9; }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #333;
+      font-weight: 500;
     }
+
+    .google-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .text-link {
+      text-align: center;
+      font-size: 14px;
+      color: #2563eb;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .message {
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .error { background: #fee2e2; color: #b91c1c; }
+    .success { background: #dcfce7; color: #15803d; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>X-ONE TECH</h1>
-    <marquee behavior="scroll" direction="left">🚀 Welcome To X-ONE OFFICIAL PAGE! Enjoy Tools, VPNs, Games & More 🚀</marquee>
-  </header>
+  <div class="card">
+    <div id="auth-section">
+      <!-- 🌟 Custom Logo (You can replace the URL below with your own logo) -->
+      <img src="https://cdn-icons-png.flaticon.com/512/906/906349.png" alt="App Logo" class="logo">
 
-  <div class="section active" id="home">
-    <button class="btn" onclick="showPage('apks')">Premium APKs</button>
-    <a class="btn" href="https://whatsapp.com/channel/0029VbBKRW7GOj9i4IEOi902">VPNs and Proxy</a>
-    <button class="btn" onclick="showPage('hacking')">X-ONE Hacking Tools</button>
-    <button class="btn" onclick="showPage('gaming')">X-ONE GAMING</button>
-    <a class="btn" href="https://wa.me/254743810633">Contact Admin</a>
+      <h2 class="title" id="form-title">Sign In</h2>
+      <input type="email" id="email" class="input" placeholder="Email" required />
+      <input type="password" id="password" class="input" placeholder="Password" required />
+      <button id="auth-btn" class="btn">Sign In</button>
+
+      <!-- ✅ Google Sign-In with Icon -->
+      <button id="google-btn" class="btn google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+        Continue with Google
+      </button>
+
+      <div class="text-link" id="toggle-auth">Don't have an account? Sign up</div>
+      <div class="text-link" id="forgot-password">Forgot Password?</div>
+      <div id="message" class="message hidden"></div>
+    </div>
+
+    <div id="user-section" class="hidden">
+      <h2 class="title">Welcome!</h2>
+      <div id="user-info"></div>
+      <button id="signout-btn" class="btn">Sign Out</button>
+    </div>
   </div>
 
-  <div class="page" id="apks">
-    <h2>Premium APKs</h2>
-    <a class="btn" href="https://www.mediafire.com/folder/84ghartgt89cl/Stream">1. Streaming Premium APKs</a>
-    <a class="btn" href="https://www.mediafire.com/folder/crb7kta67i0vi/Social">2. Social Media Premium APKs</a>
-    <a class="btn" href="https://www.mediafire.com/folder/kacoid6i33ys6/Ai+Media+Tools">3. Ai Pic/Video Generator and Editor</a>
-    <button class="btn" onclick="showPage('home')">Back</button>
-  </div>
-  <div class="page" id="hacking">
-    <h2>HACKING TOOLS for Android</h2>
-    <a class="btn" href="https://wa.me/254743810633">1. Sms Eye</a>
-    <a class="btn" href="https://www.mediafire.com/file/1458rlored7gszd/ContactEye.7z/file">2. Contact Eye</a>
-    <a class="btn" href="https://www.mediafire.com/file/glzyv9ba188838f/LocationEye.7z/file">3. Location Eye</a>
-    <a class="btn" href="https://www.mediafire.com/file/ybd6oavmwa7r0pl/GalleryEye.7z/file">4. GalleryEye</a>
-    <a class="btn" href="https://www.mediafire.com/file/zh2bi6v4lawcuaw/Wifi+Hack.7z/file">5. WiFi Hack</a>
-    <a class="btn" href="https://www.mediafire.com/folder/as4f0sgwpx9s1/Ttools">6. Termux Tools</a>
-    <button class="btn" onclick="showPage('home')">Back</button>
-  <p>🤑 PAY AND SEND ME SCREENSHOT 🤑
-  BY CLICKING CONTACT SECTION</div>
-
-  <div class="page" id="gaming">
-    <h2>X-ONE GAMING</h2>
-    <p>Games, Game Hacks & OBB Mods</p>
-    <a class="btn" href="https://www.mediafire.com/folder/1rtfxrx42rxt8/Games">1. Games</a>
-    <a class="btn" href="https://www.mediafire.com/folder/l7nqr1c1ffqdc/Obb++mods">2. Obb + Obb Mods</a>
-    <button class="btn" onclick="showPage('home')">Back</button>
-  </div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 
   <script>
-    function showPage(id) {
-      document.querySelectorAll('.section, .page').forEach(el => el.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-  </script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA9QL-2fOSt_Eanxsv-sGtVaZtlOj0oUI0",
+      authDomain: "x-254-59a20.firebaseapp.com",
+      projectId: "x-254-59a20",
+      storageBucket: "x-254-59a20.firebasestorage.app",
+      messagingSenderId: "704654604103",
+      appId: "1:704654604103:web:1b97efc00957ba6c85be62"
+    };
 
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const authBtn = document.getElementById('auth-btn');
+    const googleBtn = document.getElementById('google-btn');
+    const toggleAuth = document.getElementById('toggle-auth');
+    const forgotPassword = document.getElementById('forgot-password');
+    const messageBox = document.getElementById('message');
+    const formTitle = document.getElementById('form-title');
+    const userSection = document.getElementById('user-section');
+    const authSection = document.getElementById('auth-section');
+    const userInfo = document.getElementById('user-info');
+    const signOutBtn = document.getElementById('signout-btn');
+
+    let isSignUp = false;
+
+    function showMessage(text, isError = false) {
+      messageBox.textContent = text;
+      messageBox.className = `message ${isError ? 'error' : 'success'}`;
+      messageBox.classList.remove('hidden');
+      setTimeout(() => messageBox.classList.add('hidden'), 4000);
+    }
+
+    toggleAuth.onclick = () => {
+      isSignUp = !isSignUp;
+      formTitle.textContent = isSignUp ? 'Sign Up' : 'Sign In';
+      authBtn.textContent = isSignUp ? 'Sign Up' : 'Sign In';
+      toggleAuth.textContent = isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up";
+    };
+
+    authBtn.onclick = () => {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      if (isSignUp) {
+        auth.createUserWithEmailAndPassword(email, password)
+          .then(res => showMessage('Signup successful!'))
+          .catch(err => showMessage(err.message, true));
+      } else {
+        auth.signInWithEmailAndPassword(email, password)
+          .then(res => showMessage('Login successful!'))
+          .catch(err => showMessage(err.message, true));
+      }
+    };
+
+    googleBtn.onclick = () => {
+      auth.signInWithPopup(provider)
+        .then(res => showMessage('Google sign-in successful!'))
+        .catch(err => showMessage(err.message, true));
+    };
+
+    forgotPassword.onclick = () => {
+      const email = emailInput.value;
+      if (!email) return showMessage('Please enter your email to reset password', true);
+      auth.sendPasswordResetEmail(email)
+        .then(() => showMessage('Password reset email sent!'))
+        .catch(err => showMessage(err.message, true));
+    };
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        authSection.classList.add('hidden');
+        userSection.classList.remove('hidden');
+        userInfo.innerHTML = `<p><strong>Email:</strong> ${user.email}</p>`;
+      } else {
+        authSection.classList.remove('hidden');
+        userSection.classList.add('hidden');
+      }
+    });
+
+    signOutBtn.onclick = () => auth.signOut();
+  </script>
 </body>
 </html>
-
-         
